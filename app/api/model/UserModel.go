@@ -107,7 +107,7 @@ func (model *User) FindUserByNick(nick string) helper.ReturnType {
 func (model *User) LoginCheck(data User) helper.ReturnType {
 	user := User{}
 	err := db.
-		Select([]string{"user_id", "nick", "password"}).
+		Select([]string{"user_id", "nick", "realname", "password"}).
 		Where("nick = ? AND password = ?", data.Nick, data.Password).
 		First(&user).
 		Error
@@ -187,7 +187,6 @@ func (model *User) AddUserAvatar(UserID int, avatar string) helper.ReturnType {
 	return helper.ReturnType{Status: constants.CodeSuccess, Msg: "添加头像成功", Data: ""}
 
 }
-
 
 func (model *User) GetContestUser(contestID int, isStar int) helper.ReturnType {
 	var users []User
