@@ -60,6 +60,7 @@ func DoLogin(c *gin.Context) {
 		jsonData, _ := json.Marshal(returnData)
 		session.Set("user_id", userInfo.UserID)
 		session.Set("nick", userInfo.Nick)
+		session.Set("real_name", userInfo.Realname)
 		session.Set("identity", userInfo.Identity)
 		session.Set("data", string(jsonData))
 		session.Save()

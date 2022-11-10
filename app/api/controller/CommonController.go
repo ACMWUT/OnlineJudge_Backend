@@ -29,6 +29,14 @@ func GetUserNickFromSession(c *gin.Context) string {
 	return ""
 }
 
+func GetUserRealnameFromSession(c *gin.Context) string {
+	session := sessions.Default(c)
+	if name := session.Get("real_name"); name != "" {
+		return name.(string)
+	}
+	return ""
+}
+
 func Check(c *gin.Context) {
 	res := checkLogin(c)
 	if res.Status == constants.CodeSuccess {

@@ -24,7 +24,7 @@ import (
 
 func Submit(c *gin.Context) {
 	//TODO: auth participation and contest time
-	
+
 	problemModel := model.Problem{}
 	contestModel := model.Contest{}
 	contestUserModel := model.ContestUser{}
@@ -108,13 +108,10 @@ func Submit(c *gin.Context) {
 		c.JSON(http.StatusOK, helper.ApiReturn(constants.CodeError, "暂时无法提交", nil))
 		return
 	}
-	
-
-
 
 	newSubmit := model.Submit{
 		UserID:     userID.(uint),
-		Nick:       GetUserNickFromSession(c),
+		Nick:       GetUserRealnameFromSession(c),
 		Language:   helper.LanguageID(submitJson.Language),
 		SourceCode: submitJson.SourceCode,
 		ProblemID:  submitJson.ProblemID,
