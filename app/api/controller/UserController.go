@@ -23,7 +23,7 @@ func UpdateUserInfo(c *gin.Context) {
 
 	// Check Permission
 	redisStr := redis_key.UpdateUserInfoPermission()
-	if value, err := database.GetFromRedis(redisStr); err == nil {
+	if value, err := database.GetFromRedis(redisStr); err == nil && value != nil {
 		status, _ := redis.Int64(value, err)
 		if status == constants.PermissionDenied {
 			c.JSON(http.StatusOK, helper.ApiReturn(constants.CodeError, "当前不允许修改个人信息", nil))
@@ -31,11 +31,18 @@ func UpdateUserInfo(c *gin.Context) {
 			return
 		}
 	} else {
+		log.Println("get status from redis")
 		// status not in Redis
 		configModel := model.GlobalConfig{}
 		// get register config
-		updateUserInfoConfig := configModel.FindGlobalConfigByID(2)
+		updateUserInfoConfig := configModel.FindGlobalConfigByID(2).Data.(model.GlobalConfig)
 		_ = database.PutToRedis(redisStr, updateUserInfoConfig.Status, 3600)
+		log.Println(updateUserInfoConfig)
+		if updateUserInfoConfig.Status == constants.PermissionDenied {
+			c.JSON(http.StatusOK, helper.ApiReturn(constants.CodeError, "当前不允许修改个人信息", nil))
+			c.Abort()
+			return
+		}
 	}
 
 	var userJson model.User

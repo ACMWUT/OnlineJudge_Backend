@@ -4,6 +4,10 @@
 *.dll
 *.so
 *.dylib
+OnlineJudge
+
+# For macOS
+.DS_store
 
 # Test binary, built with `go test -c`
 *.test
