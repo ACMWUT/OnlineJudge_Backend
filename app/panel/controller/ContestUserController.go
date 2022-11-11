@@ -54,7 +54,7 @@ func AddContestUsers(c *gin.Context) {
 		}
 		defer csvFile.Close()
 		r := csv.NewReader(csvFile)
-		title, err := r.Read()
+		title, err := r.Read() // pass csv head
 		if err != nil {
 			c.JSON(http.StatusOK, helper.BackendApiReturn(constants.CodeError, "文件读取失败", false))
 			return
@@ -78,14 +78,16 @@ func AddContestUsers(c *gin.Context) {
 			var user model.User
 
 			//csv格式:0:teamID,1:realname,2:school,3:major,4:class,5:contact,6:password
-
-			user.Nick = fmt.Sprintf("c_%d_%s_%s", contestUserJSON.ContestID, record[0], record[1])
+			// Nick format
+			// ContestPrefix + ContestID + Team Number(team001)
+			// c_{contest_id}_team{team_id}
+			user.Nick = fmt.Sprintf("c_%d_%s", contestUserJSON.ContestID, record[0])
 			user.Realname = record[1]
 			user.School = record[2]
 			user.Major = record[3]
 			user.Class = record[4]
 			user.Contact = record[5]
-			user.Password = helper.GetMd5(record[6])
+			user.Password = record[6] // helper.GetMd5(record[6])
 			users = append(users, user)
 		}
 		res := userModel.AddUsersAndContestUsers(users, contestUserJSON.ContestID)
