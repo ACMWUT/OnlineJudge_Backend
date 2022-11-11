@@ -70,7 +70,7 @@ var auths = map[string]string{
 	"/panel/contest/getContestByID":      "getAllContest",
 	"/panel/contest/changeContestStatus": "updateContest",
 	"/panel/contest/flushRank":           "updateContest",
-	"/panel/contest/openOuterBoard":	  "updateContest",
+	"/panel/contest/openOuterBoard":      "updateContest",
 
 	//contest/contestUser
 	"/panel/contest/contestUser/getAllContestUsers": "getAllContest",
@@ -94,6 +94,19 @@ var auths = map[string]string{
 	"/panel/balloon/getContestBalloon": "getBalloonStatus",
 	"/panel/balloon/sendBalloon":       "setBalloonStatus",
 
+	//ojWebUserConfig
+	"/panel/ojWebUserConfig/addOJWebUserConfig":     "addOJConfig",
+	"/panel/ojWebUserConfig/deleteOJWebUserConfig":  "deleteOJConfig",
+	"/panel/ojWebUserConfig/getOJWebUserConfigByID": "getAllOJConfig",
+	"/panel/ojWebUserConfig/updateOJWebUserConfig":  "updateOJConfig",
+	"/panel/ojWebUserConfig/getAllOJWebUserConfig":  "getAllOJConfig",
+	"/panel/ojWebUserConfig/changeOJConfigStatus":   "updateOJConfig",
+
+	//TODO:添加正确的权限
+	//spider
+	"/panel/spider/getAll":      AuthPass,
+	"/panel/spider/getLastWeek": AuthPass,
+
 	// print
 	"/panel/print/getAllPrintRequest": "getPrintRequest",
 	"/panel/print/handlePrintRequest": "getPrintRequest",
@@ -114,4 +127,8 @@ var auths = map[string]string{
 	"/panel/problem/updateJudgeInfo":        "uploadData",
 	"/panel/problem/uploadXML":              "uploadData",
 	"/panel/problem/uploadImg":              "uploadData",
+
+	// global config
+	"/panel/globalconfig/getAllConfig": "getAllConfig",
+	"/panel/globalconfig/editConfig":   "editConfig",
 }

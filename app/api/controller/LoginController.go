@@ -8,11 +8,12 @@ import (
 	"OnlineJudge/constants/redis_key"
 	"OnlineJudge/core/database"
 	"encoding/json"
+	"log"
+	"net/http"
+
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"log"
-	"net/http"
 )
 
 func DoLogin(c *gin.Context) {
@@ -59,6 +60,7 @@ func DoLogin(c *gin.Context) {
 		jsonData, _ := json.Marshal(returnData)
 		session.Set("user_id", userInfo.UserID)
 		session.Set("nick", userInfo.Nick)
+		session.Set("real_name", userInfo.Realname)
 		session.Set("identity", userInfo.Identity)
 		session.Set("data", string(jsonData))
 		session.Save()

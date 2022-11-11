@@ -22,7 +22,7 @@ type User struct {
 	Status   int    `json:"status" form:"status"`
 }
 
-//TableName 设定表名
+// TableName 设定表名
 func (User) TableName() string {
 	return "users"
 }
@@ -57,7 +57,7 @@ func (model *User) DeleteUser(userID int) helper.ReturnType {
 	}
 }
 
-//AddUser 添加用户
+// AddUser 添加用户
 func (model *User) AddUser(newUser User) helper.ReturnType {
 	user := User{}
 
@@ -74,8 +74,8 @@ func (model *User) AddUser(newUser User) helper.ReturnType {
 	}
 }
 
-//AddUsersAndContestUsers 添加多个用户和比赛用户，不检测邮箱冲突
-//此处对contestUser也进行了添加
+// AddUsersAndContestUsers 添加多个用户和比赛用户，不检测邮箱冲突
+// 此处对contestUser也进行了添加
 func (model *User) AddUsersAndContestUsers(newUsers []User, contestID int) helper.ReturnType {
 	user := User{}
 	tx := db.Begin()
@@ -113,6 +113,7 @@ func (model *User) AddUsersAndContestUsers(newUsers []User, contestID int) helpe
 			return helper.ReturnType{Status: constants.CodeError, Msg: "参加比赛失败", Data: ""}
 		}
 	}
+	tx.Commit()
 	return helper.ReturnType{Status: constants.CodeSuccess, Msg: "创建成功", Data: true}
 
 }
@@ -165,7 +166,7 @@ func (model *User) GetUserByID(userID int) helper.ReturnType {
 	}
 }
 
-//GetUserByNick 由用户名获取用户
+// GetUserByNick 由用户名获取用户
 func (model *User) GetUserByNick(userNick string) helper.ReturnType {
 	var getUser User
 

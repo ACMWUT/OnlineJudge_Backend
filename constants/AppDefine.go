@@ -23,3 +23,6 @@ const UnLogin = false
 
 const CommonContest = 1
 const UploadOnly = 2
+
+const PermissionDenied = 0
+const PermissionPass = 1

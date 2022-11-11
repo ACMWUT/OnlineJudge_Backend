@@ -17,6 +17,7 @@ func Run(httpServer *gin.Engine) {
 	serverConfig := config.GetServerConfig()
 	sessionConfig := config.GetSessionConfig()
 	judgeConfig := config.GetJudgeConfig()
+
 	// 运行模式
 	gin.SetMode(serverConfig["mode"].(string))
 	httpServer = gin.Default()
@@ -31,9 +32,11 @@ func Run(httpServer *gin.Engine) {
 	httpServer.Use(sessions.Sessions(sessionConfig["name"].(string), sessionStore))
 
 	gin.DisableConsoleColor()
+
 	// 生成日志
 	logFile, _ := os.Create(config.GetLogPath())
 	gin.DefaultWriter = io.MultiWriter(logFile, os.Stdout, os.Stdin, os.Stderr)
+
 	// 设置日志格式
 	httpServer.Use(gin.LoggerWithFormatter(config.GetLogFormat))
 	httpServer.Use(gin.Recovery())
