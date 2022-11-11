@@ -70,7 +70,7 @@ var auths = map[string]string{
 	"/panel/contest/getContestByID":      "getAllContest",
 	"/panel/contest/changeContestStatus": "updateContest",
 	"/panel/contest/flushRank":           "updateContest",
-	"/panel/contest/openOuterBoard":	  "updateContest",
+	"/panel/contest/openOuterBoard":      "updateContest",
 
 	//contest/contestUser
 	"/panel/contest/contestUser/getAllContestUsers": "getAllContest",
@@ -127,4 +127,8 @@ var auths = map[string]string{
 	"/panel/problem/updateJudgeInfo":        "uploadData",
 	"/panel/problem/uploadXML":              "uploadData",
 	"/panel/problem/uploadImg":              "uploadData",
+
+	// global config
+	"/panel/globalconfig/getAllConfig": "getAllConfig",
+	"/panel/globalconfig/editConfig":   "editConfig",
 }

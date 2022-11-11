@@ -165,6 +165,13 @@ func BackendRoutes(router *gin.Engine) {
 			problem.POST("/uploadXML", panelController.UploadXML)
 			problem.POST("/uploadImg", panelController.UploadImg)
 		}
+
+		globalConfig := panel.Group("/globalconfig")
+		{
+			globalConfig.POST("/getAllConfig", panelController.GetAllConfigStatus)
+			globalConfig.POST("/editConfig", panelController.UpdateConfigStatus)
+		}
+
 	}
 	router.StaticFS("/admin/", http.Dir("./web/admin"))
 	router.StaticFS("/board/", http.Dir("./web/board"))
