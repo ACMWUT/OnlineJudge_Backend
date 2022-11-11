@@ -122,8 +122,7 @@ for (var i = 0; i < sorted.length; i++) {
     '<td class="rank"></td>' +
     '<td class="schoolrank"></td>' +
     '<td class="school">' + tm.school + '</td>' +
-    '<td class="team" members="' + tm.members + '">' +
-    tm.team + '</td>' +
+    '<td class="team" members="' + tm.team + '">' + tm.members + '</td>' +
     '<td class="solved">' + records[team].solved + '</td>' +
     '<td class="penalty">' + records[team].penalty + '</td>'
   );
