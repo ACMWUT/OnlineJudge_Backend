@@ -6,6 +6,12 @@
 - 框架：gin+gorm
 
 ## 部署
+## ⚠️目前可以直接执行相应脚步进行部署
+```shell
+sh deploy_dev.sh # 部署到dev环境
+sh deploy_master.sh # 部署到master环境
+```
+
 1. 交叉编译到Linux amd64平台
 2. 将编译出来的可执行文件上传到服务器`/home/htdocs/dev/backend/app/`目录
 3. 执行`/root`目录下的`deploy_master.sh`
