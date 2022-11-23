@@ -130,7 +130,7 @@
                             $("#memory").val(data.data.memory)
                             $("#time").val(data.data.time)
                             $("#submit_time").val(data.data.submit_time)
-                            $("#code").html(data.data.source_code)
+                            $("#code").html(data.data.source_code.replaceAll('\u003c','&lt;').replaceAll('\u003e','&gt;'))
                             form.render();
                         } else {
                             layer.msg("获取信息错误", () => {
