@@ -87,7 +87,7 @@ func AddContestUsers(c *gin.Context) {
 			user.Major = record[3]
 			user.Class = record[4]
 			user.Contact = record[5]
-			user.Password = record[6] // helper.GetMd5(record[6])
+			user.Password = helper.GetMd5(record[6])
 			users = append(users, user)
 		}
 		res := userModel.AddUsersAndContestUsers(users, contestUserJSON.ContestID)

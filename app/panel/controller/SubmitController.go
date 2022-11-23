@@ -7,9 +7,10 @@ import (
 	"OnlineJudge/config"
 	"OnlineJudge/constants"
 	"OnlineJudge/core/judger"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type problem struct {
@@ -105,7 +106,7 @@ func RejudgeGroupSubmits(c *gin.Context) {
 	if c.ShouldBind(&submitJson) == nil {
 		whereData := map[string]string{
 			"user_id": submitJson.UserID, "problem_id": submitJson.ProblemID,
-			"contest_id": submitJson.ContestID, "language": submitJson.ContestID,
+			"contest_id": submitJson.ContestID, "language": submitJson.Language,
 			"status": submitJson.Status,
 		}
 		res := submitModel.GetSubmitGroup(whereData, submitJson.MinSubmitTime, submitJson.MaxSubmitTime)
